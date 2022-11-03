@@ -29,10 +29,17 @@ class _DownloadState extends State<Download> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: Colors.purpleAccent,
       appBar: AppBar(
         title: const Text(
           'Download Files',
+          style: TextStyle(
+            color: Color(0xffEDFF36)
+          ),
         ),
+        leading: BackButton(
+          color: Colors.purpleAccent,
+        )
       ),
       body: FutureBuilder<ListResult>(
         future: futureFiles,
@@ -44,16 +51,16 @@ class _DownloadState extends State<Download> {
               final file = files[index];
               double? progress = downloadProgress[index];
               return ListTile(
-                title: Text(file.name),
+                title: Text(file.name,style: TextStyle(color: Color(0xffEDFF36)),),
                 subtitle: progress!=null
                   ?LinearProgressIndicator(
                     value: progress,
-                    backgroundColor: Colors.black,
+                    backgroundColor: Colors.deepPurple[900],
                 ):null,
                 trailing: IconButton(
                   icon: const Icon(
                     Icons.download,
-                    color: Colors.black,
+                    color: Color(0xffEDFF36),
                   ),
                   onPressed: (){
                     downloadFile(index,file);

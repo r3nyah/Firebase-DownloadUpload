@@ -18,10 +18,17 @@ class _UploadState extends State<Upload> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: Colors.purpleAccent,
       appBar: AppBar(
         title: const Text(
           'Upload File',
+          style: TextStyle(
+            color: Color(0xffEDFF36),
+          ),
         ),
+        leading: BackButton(
+          color: Colors.purpleAccent,
+        )
       ),
       body: Center(
         child: Column(
@@ -42,17 +49,15 @@ class _UploadState extends State<Upload> {
               ),
             SizedBox(height: 32,),
             ElevatedButton(
-              child: const Text(
-                'Select File',
-              ),
               onPressed: selectFile,
+              child: Text('Select',style: TextStyle(color: Color(0xffEDFF36),),),
+              style: ElevatedButton.styleFrom(shape: StadiumBorder()),
             ),
             const SizedBox(height: 32,),
             ElevatedButton(
-              child: const Text(
-                'Upload File',
-              ),
               onPressed: uploadFile,
+              child: Text('Upload',style: TextStyle(color: Color(0xffEDFF36),),),
+              style: ElevatedButton.styleFrom(shape: StadiumBorder()),
             ),
             buildProgress(),
           ],
@@ -71,7 +76,7 @@ class _UploadState extends State<Upload> {
   }
 
   Future uploadFile()async{
-    final path = 'upload/${pickedFile!.name}';
+    final path = 'files/${pickedFile!.name}';
     final file = File(pickedFile!.path!);
 
     final ref = FirebaseStorage.instance.ref().child(path);
@@ -108,7 +113,7 @@ class _UploadState extends State<Upload> {
                 LinearProgressIndicator(
                   value: progress,
                   backgroundColor: Colors.purple,
-                  color: Colors.deepPurple,
+                  color: Colors.purple,
                 ),
                 Center(
                   child: Text(
